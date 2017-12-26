@@ -1,20 +1,90 @@
-<!--
-  ~ Copyright (c) 2016 VMware, Inc. All Rights Reserved.
-  ~ This software is released under MIT license.
-  ~ The full license information can be found in LICENSE in the root directory of this project.
-  -->
-<p>This is a Clarity seed application. This is the default page that loads for the application.</p>
-
-<clr-dropdown>
-    <button clrDropdownTrigger class="btn">
-        Dropdown
-        <clr-icon shape="caret down"></clr-icon>
-    </button>
-    <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-        <a clrDropdownItem href="javascript://">Action 1</a>
-        <a clrDropdownItem href="javascript://">Action 2</a>
-        <div class="dropdown-divider"></div>
-        <a clrDropdownItem href="javascript://">Link 1</a>
-        <a clrDropdownItem href="javascript://">Link 2</a>
-    </clr-dropdown-menu>
-</clr-dropdown>
+<!--pre>
+    {{materials}}
+</pre-->
+<h4>Home</h4>
+<div class="row">
+    <div class="col-xs-6 col-md-6 col-lg-6 col-xl-4">
+        <button class="btn btn-primary" (click)="newDialogOpen = true">Add Layer</button>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Width [cm]</th>
+                    <th>Material</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let layer of layers">
+                    <td>{{layer.name}}</td>
+                    <td>{{layer.width}}</td>
+                    <td>{{layer.material.name}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-xs-6 col-md-6 col-lg-6 col-xl-4">
+        <svg width="400" height="200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <pattern id="ANSI30" patternUnits="userSpaceOnUse" width="4" height="4">
+                    <path d="M0,0 l0,4" style="stroke:hsl(0, 0%, 0%); stroke-width:1" />
+                </pattern>
+                <pattern id="ANSI31" patternUnits="userSpaceOnUse" width="4" height="4">
+                    <path d="M-1,1 l2,-2
+                        M0,4 l4,-4
+                        M3,5 l2,-2" style="stroke:hsl(0, 0%, 0%); stroke-width:1" />
+                </pattern>
+                <pattern id="ANSI32" patternUnits="userSpaceOnUse" width="8" height="8">
+                    <path d="M-2,2 l4,-4
+                        M0,8 l8,-8
+                        M6,10 l4,-4" style="stroke:hsl(0, 0%, 0%); stroke-width:1" />
+                </pattern>
+                <pattern id="ANSI33" patternUnits="userSpaceOnUse" width="4" height="4">
+                    <path d="M0,0 l4,0" style="stroke:hsl(0, 0%, 0%); stroke-width:1" />
+                </pattern>
+            </defs>
+            <g *ngFor="let layer of getLayers()">
+                <rect [attr.x]="layer.x*5" y="0" [attr.width]="layer.width*5" height="200"
+                    [attr.fill]="'url(#'+layer.material.hatch+')'"
+                    style="stroke:hsl(0, 0%, 0%); stroke-width:1"/>
+            </g>
+        </svg>
+    </div>
+</div>
+<clr-modal [(clrModalOpen)]="newDialogOpen">
+    <h3 class="modal-title">Add New Layer</h3>
+    <div class="modal-body">
+        <div>
+            <label class="required">Layer Name</label>
+            <label for="layerName" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation invalid tooltip-md">
+                <input type="text" id="layerName">
+                <span class="tooltip-content">
+                    This field cannot be empty!
+                </span>
+            </label>
+        </div>
+        <div>
+            <label class="required">Layer Width</label>
+            <label for="layerWidth" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation invalid tooltip-md">
+                <input type="text" id="layerWidth">
+                <span class="tooltip-content">
+                    This field cannot be empty!
+                </span>
+            </label>
+        </div>
+        <div>
+            <label class="required">Layer Material</label>
+            <label for="layerMaterial" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation invalid tooltip-md">
+                <select id="layerMaterial">
+                    <option *ngFor="let mat of materials">{{mat.name}}</option>
+                </select>
+                <span class="tooltip-content">
+                    This field cannot be empty!
+                </span>
+            </label>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="newDialogOpen = false">Add</button>
+        <button type="button" class="btn btn-outline" (click)="newDialogOpen = false">Cancel</button>
+    </div>
+</clr-modal>

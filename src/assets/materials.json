@@ -1,0 +1,26 @@
+[
+    {
+        "name":"concrete",
+        "thermalConductivity":1.5,
+        "vapourConductivity":1.5,
+        "hatch": "ANSI32"
+    },
+    {
+        "name":"brick",
+        "thermalConductivity":0.8,
+        "vapourConductivity":1,
+        "hatch": "ANSI31"
+    },
+    {
+        "name":"polistyrene",
+        "thermalConductivity":0.3,
+        "vapourConductivity":0.2,
+        "hatch": "ANSI33"
+    },
+    {
+        "name":"air",
+        "thermalConductivity":0.01,
+        "vapourConductivity":1,
+        "hatch": "ANSI30"
+    }
+]
