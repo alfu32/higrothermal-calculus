@@ -10,13 +10,15 @@ import { ROUTING } from "./app.routing";
 import { HomeComponent } from "./home/home.component";
 import { AboutComponent } from "./about/about.component";
 // import { HgtLayerComponent } from './hgt-layer/hgt-layer.component';
+import { HgtSvgLayerComponent } from './hgt-svg-layer/hgt-svg-layer.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         AboutComponent,
-        HomeComponent/*,
-        HgtLayerComponent*/
+        HomeComponent /*,
+        HgtLayerComponent*/,
+        HgtSvgLayerComponent
     ],
     imports: [
         BrowserAnimationsModule,
@@ -30,5 +32,4 @@ import { AboutComponent } from "./about/about.component";
     providers: [],
     bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule {}
